@@ -22,3 +22,7 @@ backend_start.out.txt
 backend_start.err.txt
 .agent/
 .vscode/
+mobile/lib/firebase_options.dart
+mobile/android/app/google-services.json
+mobile/ios/Runner/GoogleService-Info.plist
+

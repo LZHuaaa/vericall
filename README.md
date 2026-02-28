@@ -393,47 +393,6 @@ See [SETUP.md](SETUP.md) for full deployment guide including Docker, cloud deplo
 
 ---
 
-## Demo Flow
-
-1. Start backend + web app (use `start.bat` or `docker compose up`)
-2. Open web app at `http://localhost:3000` (this is the "scammer" panel)
-3. Open mobile app on phone/emulator (this is the "victim" phone)
-4. On web app: Click "Start Demo Call"
-5. On mobile: Incoming call appears -> Answer
-6. On web app: Type as the scammer / use AI-generated scam scripts
-7. Watch real-time: transcript, scam probability meter, Uncle Ah Hock responses
-8. When scam threshold is reached: auto-hangup triggers
-9. On mobile: Post-call report appears with threat summary, reason codes, and PDRM report
-
----
-
-## Demo Video Script (5 Minutes)
-
-Use this timed script for the KitaHack submission video. Every 30 seconds over 5 minutes = 1 point deduction.
-
-| Time | Section | What to Show / Say |
-|------|---------|-------------------|
-| 0:00 - 0:30 | **Intro** | Team name, project name "VeriCall Malaysia", SDG 16: Peace, Justice and Strong Institutions. One sentence: "We built a 5-layer AI defense that protects Malaysians from both AI and human voice scammers." |
-| 0:30 - 1:00 | **The Problem** | Show statistics: RM2.72B lost, 454 deepfake cases, Malaysia blocked Grok AI. Key insight: "70% of scam calls use REAL humans - existing AI detectors miss them entirely." |
-| 1:00 - 1:30 | **Tech Stack** | Show the architecture diagram. Highlight: 5 Gemini model variants, Firebase real-time sync, Flutter mobile app. Briefly name each of the 5 defense layers. |
-| 1:30 - 2:00 | **Live Demo Setup** | Show `start.bat` starting both services. Open web panel at localhost:3000. Show mobile app on phone/emulator. |
-| 2:00 - 3:00 | **Live Demo: Scam Call** | On web: type as LHDN scammer demanding payment. On mobile: show transcript appearing in real-time, scam meter rising from green to red, Uncle Ah Hock activating and responding in Manglish. |
-| 3:00 - 3:20 | **Live Demo: Auto-Hangup** | Show auto-hangup triggering. On mobile: show the post-call threat report with risk score, reason codes, and full transcript. |
-| 3:20 - 3:40 | **PDRM Report** | Show the generated police report with case ID, scam classification, evidence summary. Tap "Share Report" to demonstrate sharing. |
-| 3:40 - 4:00 | **Scam Vaccine** | Open Scam Vaccine screen. Start a training session. Show TTS speaking the scam scenario and demonstrate voice response via STT. |
-| 4:00 - 4:20 | **Intelligence + Quiz** | Show the scam intelligence feed with real-time data. Start the dynamic quiz generated from latest scam patterns. |
-| 4:20 - 4:40 | **Family Protection** | Show Family Link screen. Demonstrate how alerts are sent to linked family members via FCM push notifications when a scam is detected. |
-| 4:40 - 5:00 | **Impact + Close** | "VeriCall can prevent RM2.72 billion in annual scam losses. Every minute Uncle Ah Hock wastes a scammer's time is one minute NOT spent scamming a real victim." SDG 16 alignment. Future roadmap: telco integration, multi-language support. Thank you. |
-
-### Demo Tips
-- **Pre-warm the backend** before recording: start it 30 seconds early so models are loaded
-- **Use a physical phone** alongside your laptop for visual impact (phone = victim, laptop = scammer)
-- **Keep the web panel and mobile side-by-side** on screen so judges see both perspectives simultaneously
-- **Pre-type one scam message** so you can paste it quickly during the live demo
-- **Test audio** beforehand: ensure TTS/STT work on your device
-- **Have a backup recording** of the demo flow in case of live technical issues
-
----
 
 ## Environment Variables
 
@@ -458,18 +417,6 @@ Use this timed script for the KitaHack submission video. Every 30 seconds over 5
 
 ### Mobile App
 Pass via `flutter run --dart-define=VERICALL_API_BASE_URL=http://YOUR_IP:5000/api` for physical devices.
-
----
-
-## Cost
-
-| Service | Tier | Monthly Cost |
-|---------|------|-------------|
-| Gemini API | Free tier (15 RPM) | $0 |
-| Firebase | Spark (free) plan | $0 |
-| Google Cloud Run | Free tier (2M requests) | $0 |
-| Flutter | Open source | $0 |
-| **Total** | | **$0** |
 
 ---
 
