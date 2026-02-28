@@ -1,0 +1,24 @@
+# secrets
+backend/.env
+backend/firebase-credentials.json
+uncle-ah-hock---johor-kopi-chat/.env.local
+.env
+.env.*
+!backend/.env.example
+!uncle-ah-hock---johor-kopi-chat/.env.example
+
+# firebase admin/service account files
+**/*serviceAccount*.json
+**/firebase-credentials.json
+
+# mobile signing secrets
+mobile/android/key.properties
+*.jks
+*.keystore
+mobile/ios/Runner/GoogleService-Info.plist
+nul
+tmpclaude-*
+backend_start.out.txt
+backend_start.err.txt
+.agent/
+.vscode/

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "89200208599",
+    "project_id": "vericall-malaysia",
+    "storage_bucket": "vericall-malaysia.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:89200208599:android:22dd175cacef73fb831e92",
+        "android_client_info": {
+          "package_name": "com.vericall.vericall_mobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAz8RaOkNvQd6mVRdU7dP4TvpV1RpSPNQ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

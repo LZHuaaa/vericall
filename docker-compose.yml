@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+      - "8765:8765"
+    env_file:
+      - ./backend/.env
+    environment:
+      - DEBUG=false
+      - FIREBASE_CREDENTIALS_PATH=/app/firebase-credentials.json
+    volumes:
+      # Mount firebase credentials if available
+      - ./backend/firebase-credentials.json:/app/firebase-credentials.json:ro
+    restart: unless-stopped
+
+  web:
+    build:
+      context: ./uncle-ah-hock---johor-kopi-chat
+      args:
+        VITE_BACKEND_URL: http://localhost:5000/api
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./uncle-ah-hock---johor-kopi-chat/.env.local
+    depends_on:
+      - backend
+    restart: unless-stopped

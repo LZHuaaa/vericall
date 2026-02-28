@@ -1,0 +1,31 @@
+# Core ML/AI
+torch>=2.6.0
+torchaudio>=2.6.0
+transformers>=4.36.0
+
+# Audio Processing
+librosa>=0.10.1
+scipy>=1.11.4
+pydub>=0.25.1
+soundfile>=0.12.1
+
+# Gemini AI (latest for 2.5 Flash features)
+google-genai>=1.20.0
+google-generativeai>=0.8.0
+
+# Firebase
+firebase-admin>=6.3.0
+
+# Web Framework
+flask>=3.0.0
+flask-cors>=4.0.0
+
+# Utilities
+numpy>=1.24.3
+python-dotenv>=1.0.0
+
+# Real-time Communication
+websockets>=12.0
+
+# VOIP (for demo)
+twilio>=8.10.0

@@ -1,0 +1,7 @@
+{
+  "name": "Uncle Ah Hock - Johor Kopi Chat",
+  "description": "Have a chat with Uncle Ah Hock, a 75-year-old from Johor who is a bit hard of hearing. Powered by Gemini Live API & TTS.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
