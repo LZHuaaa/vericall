@@ -1,423 +1,446 @@
 # VeriCall Malaysia
 
-**AI-Powered 5-Layer Defense Against Voice Scams for Malaysia**
+**AI-assisted voice scam detection prototype for Malaysia**
 
-[![KitaHack 2026](https://img.shields.io/badge/KitaHack-2026-FF6F00?style=flat-square)](https://kitahack.dev)
-[![SDG 16](https://img.shields.io/badge/UN%20SDG-16%20Peace%20%26%20Justice-00689D?style=flat-square)](https://sdgs.un.org/goals/goal16)
-[![Gemini 2.5](https://img.shields.io/badge/Gemini-2.5%20Pro%20%7C%20Flash%20%7C%20Native%20Audio%20%7C%20TTS-4285F4?style=flat-square)](https://ai.google.dev)
-[![Firebase](https://img.shields.io/badge/Firebase-Firestore%20%7C%20FCM%20%7C%20Auth-FFCA28?style=flat-square)](https://firebase.google.com)
 [![Flutter](https://img.shields.io/badge/Flutter-3.x-02569B?style=flat-square)](https://flutter.dev)
+[![React](https://img.shields.io/badge/React-Vite%20%7C%20TypeScript-61DAFB?style=flat-square)](https://react.dev)
+[![Python](https://img.shields.io/badge/Python-Flask-3776AB?style=flat-square)](https://flask.palletsprojects.com)
+[![Firebase](https://img.shields.io/badge/Firebase-Firestore%20%7C%20FCM%20%7C%20Auth-FFCA28?style=flat-square)](https://firebase.google.com)
+[![Google Gemini](https://img.shields.io/badge/Google%20AI-Gemini-4285F4?style=flat-square)](https://ai.google.dev)
 [![Made in Malaysia](https://img.shields.io/badge/Made%20in-Malaysia-CC0001?style=flat-square)]()
 
 ---
 
-## KitaHack 2026 Submission Checklist
+## Overview
 
-| Requirement | Status | Details |
-|-------------|--------|---------|
-| Google AI Technology | Yes | Gemini 2.5 Pro, Gemini 2.5 Flash, Gemini Native Audio, Gemini TTS, Gemini Grounding with Google Search |
-| Google Developer Technology | Yes | Firebase (Firestore, FCM, Auth), Flutter, Google Cloud Run |
-| UN SDG Alignment | Yes | **SDG 16: Peace, Justice and Strong Institutions** |
-| Working Prototype | Yes | Mobile app (Flutter) + Web panel (React/Vite) + Backend API (Flask) |
+VeriCall Malaysia is a prototype system that explores how AI, audio analysis, real-time alerts, and user education can help protect Malaysians from voice scam attempts.
 
----
+The project focuses on common scam patterns such as bank impersonation, LHDN/PDRM impersonation, fake urgent payment requests, social engineering scripts, and voice-cloning risks. Instead of relying on only one detection method, VeriCall combines multiple signals from audio, conversation content, caller behaviour, and contextual verification.
 
-## The Problem
+The system includes:
 
-Malaysia is facing an unprecedented voice scam crisis:
+* A **Flutter mobile app** for call monitoring, scam reports, alerts, and user training
+* A **Python Flask backend** for scam analysis, audio-processing experiments, and threat scoring
+* A **React/Vite web dashboard** for demo call simulation and live analysis
+* **Firebase Firestore and FCM** for real-time sync and family alert notifications
+* **Google Gemini-based analysis** for scam content reasoning, caller claim checks, and training scenario generation
 
-- **RM2.72 billion** lost to scams in Malaysia (BNM, 2024)
-- **454 deepfake fraud cases** reported in a single year
-- Malaysia became the **first country to block Grok AI** (January 12, 2026) due to deepfake concerns
-- **70% of scam calls** use real human callers reading scripts, not AI-generated voices
-- Existing solutions only detect AI-generated voices, completely missing **human scammers**
-- Elderly Malaysians are disproportionately targeted and lack digital literacy to defend themselves
-
-Current anti-scam tools fail because they focus on a single detection vector. VeriCall addresses the full spectrum of voice scam attacks.
+> This is a prototype, not a production-ready replacement for telco-level scam blocking, police reporting, or bank fraud prevention systems.
 
 ---
 
-## Our Solution: 5-Layer AI Defense
+## Why This Project Matters
 
-VeriCall combines 5 complementary detection layers to catch both AI and human scammers, then actively fights back:
+Voice scams are becoming harder to detect because scammers may use real human callers, scripted social engineering, AI-generated voices, or cloned voices. Many detection tools focus mainly on whether a voice sounds synthetic, but real-world scams often depend more on what the caller says and how they pressure the victim.
 
-```
-+================================================================+
-|                    VeriCall 5-Layer Defense                     |
-+================================================================+
-|                                                                |
-|  Layer 1: Audio Deepfake Detection                             |
-|           WavLM (94.7M params) + Gemini Native Audio           |
-|           Catches AI-generated / cloned voices                 |
-|                                                                |
-|  Layer 2: Scam Content Analysis                                |
-|           Gemini 2.5 Pro with extended thinking                |
-|           Catches human scammers reading scripts (95%!)        |
-|                                                                |
-|  Layer 3: Caller Verification                                  |
-|           Phone database + Gemini Grounding w/ Google Search   |
-|           Verifies claimed organizations in real-time          |
-|                                                                |
-|  Layer 4: Behavioral Analysis                                  |
-|           Pattern matching on urgency, threats, voice capture  |
-|           Detects manipulation tactics and voice harvesting    |
-|                                                                |
-|  Layer 5: Anti-Voice-Cloning                                   |
-|           Adversarial noise injection                          |
-|           Prevents your voice from being cloned during calls   |
-|                                                                |
-+================================================================+
-|  Active Defense: Uncle Ah Hock AI Decoy                        |
-|  Scam Vaccine: Interactive voice training for users            |
-+================================================================+
-```
+VeriCall was built to explore a broader approach:
 
-### What Sets VeriCall Apart
-
-| Traditional Solutions | VeriCall |
-|----------------------|----------|
-| Only detect AI-generated voices | Detects BOTH AI and human scammers |
-| No voice cloning protection | Prevents voice capture attacks |
-| Passive alerts only | Active defense with Uncle Ah Hock decoy AI |
-| No user education | Scam Vaccine trains users with realistic simulations |
-| Single detection method | 3-signal fusion engine with weighted scoring |
-
----
-
-## Technical Architecture
-
-```
-+-------------------------------------+
-|  Mobile App (Flutter)               |  Native Android/iOS
-|  - 10 screens                       |
-|  - Real-time call monitoring        |
-|  - Live transcript display          |
-|  - Post-call threat report          |
-|  - Scam Vaccine voice training      |
-|  - Family alert network             |
-+----------------+--------------------+
-                 | HTTP REST + Firestore real-time sync
-+----------------v--------------------+
-|  Backend API (Python Flask)         |  Port 5000
-|  - 20 service modules              |
-|  - Threat Engine v2                 |
-|  - WavLM deepfake detection         |
-|  - Gemini AI integration (5 models)|
-|  - WebSocket audio relay            |  Port 8765
-+----------------+--------------------+
-                 | HTTP + WebSocket + Firestore
-+----------------v--------------------+
-|  Web App (React / Vite / TS)        |  Port 3000
-|  - Uncle Ah Hock scammer panel      |
-|  - Real-time audio streaming        |
-|  - Live scam analysis dashboard     |
-|  - PDRM report generation           |
-+----------------+--------------------+
-                 |
-+----------------v--------------------+
-|  Firebase (Cloud)                   |  Free tier
-|  - Firestore: call state sync      |
-|  - FCM: family push notifications   |
-|  - Auth: anonymous user IDs         |
-+-----------+------------------------+
-            |
-+-----------v------------------------+
-|  Google AI (Cloud)                  |
-|  - Gemini 2.5 Pro                   |
-|  - Gemini 2.5 Flash                 |
-|  - Gemini Native Audio              |
-|  - Gemini TTS                       |
-|  - Grounding with Google Search     |
-+------------------------------------+
-```
-
----
-
-## Google Technologies Used
-
-| Technology | Model / Service | Where Used | Purpose |
-|------------|----------------|------------|---------|
-| **Gemini 2.5 Pro** | `gemini-2.5-pro-preview-05-06` | Threat Engine | Deep scam reasoning with extended thinking for ambiguous cases |
-| **Gemini 2.5 Flash** | `gemini-2.5-flash-preview-04-17` | Scam Analyzer, Uncle Ah Hock, Scam Vaccine | Real-time scam content analysis, AI decoy conversation, training scenarios |
-| **Gemini Native Audio** | `gemini-2.5-flash-native-audio-latest` | Audio Deepfake Detector | Live audio stream analysis for synthetic voice detection |
-| **Gemini TTS** | `gemini-2.5-flash-preview-tts` | Uncle Ah Hock Voice | Text-to-speech synthesis for the AI decoy's Manglish voice |
-| **Gemini Grounding** | Google Search integration | Scam Intelligence, Caller Verification | Real-time verification of claimed organizations and latest scam patterns |
-| **Firebase Firestore** | Real-time database | Call State Sync | Bi-directional real-time sync between mobile, backend, and web (`calls/current_demo`) |
-| **Firebase Cloud Messaging** | Push notifications | Family Alert Network | Instant push alerts to linked family members when scam detected |
-| **Firebase Auth** | Anonymous authentication | User Management | Privacy-preserving user identification without requiring sign-up |
-| **Flutter** | 3.x SDK | Mobile App | Cross-platform native app with 10 screens for Android and iOS |
-
----
-
-## Implementation Details
-
-### Threat Engine v2 - 3-Signal Fusion
-
-The core intelligence system fuses three independent detection signals with weighted scoring:
-
-```
-Signal Weights:
-  Deepfake Detection (WavLM + Gemini Audio):  42%
-  LLM Scam Analysis (Gemini 2.5 Pro):         43%
-  Retrieval Engine (pattern matching):         15%
-                                              ----
-  Combined Threat Score:                      100%
-```
-
-**4-Tier Auto-Hangup Policy:**
-| Tier | Rule | Trigger |
-|------|------|---------|
-| A | Silence Fast | Extended caller silence detected |
-| B | Deepfake + Risk | High deepfake score combined with high scam risk |
-| C | Hard Bot | Automated bot caller confirmed |
-| D | Spoken High Deepfake | Synthetic voice actively speaking with high confidence |
-
-### WavLM Deepfake Detection
-- Model: `microsoft/wavlm-base-plus` (94.7M parameters)
-- Pretrained audio transformer for speech representation
-- Binary classification head for real vs. synthetic voice
-- Processes raw audio waveforms at 16kHz
-
-### Uncle Ah Hock AI Decoy
-- Speaks Manglish (English + Malay + Hokkien mix)
-- Persona: confused elderly uncle from Johor
-- Multi-turn conversation engine powered by Gemini 2.5 Flash
-- Voice synthesis via Gemini TTS
-- Goal: waste scammer's time for 10-30 minutes
-
-### Scam Vaccine Training
-- Interactive voice-based training simulations
-- TTS speaks scam scenarios aloud, STT captures user responses
-- Teaches users to recognize common scam patterns
-- Powered by Gemini 2.5 Flash for dynamic scenario generation
-
-### Real-Time Audio Pipeline
-- Browser captures audio via WebRTC
-- WebSocket relay bridge (port 8765) forwards audio to backend
-- Backend processes audio through WavLM + Gemini Native Audio
-- Results sync to mobile via Firestore in under 2 seconds
-
----
-
-## Project Structure
-
-```
-vericall-malaysia/
-|
-+-- backend/                          # Python Flask API (Port 5000)
-|   +-- app/
-|   |   +-- api/routes.py             # 60+ API endpoints
-|   |   +-- services/
-|   |   |   +-- threat_orchestrator.py     # Threat Engine v2 (3-signal fusion)
-|   |   |   +-- hangup_policy.py           # 4-tier auto-hangup rules
-|   |   |   +-- deepfake_detector.py       # WavLM audio deepfake detection
-|   |   |   +-- gemini_audio_detector.py   # Gemini Native Audio analysis
-|   |   |   +-- gemini_audio_analyzer.py   # Audio stream processing
-|   |   |   +-- scam_analyzer.py           # Gemini 2.5 Pro scam content analysis
-|   |   |   +-- uncle_ah_hock.py           # AI decoy conversation engine
-|   |   |   +-- scam_vaccine.py            # Training scenario generator
-|   |   |   +-- scam_intelligence.py       # Real-time scam intelligence feed
-|   |   |   +-- scam_grounding.py          # Gemini Grounding + Google Search
-|   |   |   +-- firebase_service.py        # Firestore + FCM integration
-|   |   |   +-- call_audio_bridge.py       # WebSocket audio relay
-|   |   |   +-- call_orchestrator.py       # Call lifecycle management
-|   |   |   +-- retrieval_engine.py        # Pattern-based threat retrieval
-|   |   |   +-- hybrid_detector.py         # Combined detection pipeline
-|   |   |   +-- pattern_learner.py         # Adaptive pattern learning
-|   |   |   +-- redaction.py               # PII redaction for reports
-|   |   |   +-- gemini_adapter.py          # Gemini API key rotation
-|   |   |   +-- train_classifier.py        # Model training utilities
-|   |   |   +-- complete_vericall_implementation.py  # 5-Layer orchestration
-|   |   +-- config.py                  # Environment configuration
-|   +-- demo.py                        # Live demo script
-|   +-- test_api.py                    # API test suite
-|   +-- requirements.txt
-|   +-- Dockerfile
-|
-+-- mobile/                            # Flutter App (Android/iOS)
-|   +-- lib/
-|   |   +-- screens/
-|   |   |   +-- home_screen.dart           # Dashboard with threat status
-|   |   |   +-- call_screen.dart           # Dialer / call initiation
-|   |   |   +-- incoming_call_screen.dart  # Incoming call UI
-|   |   |   +-- active_call_screen.dart    # Live call with transcript + scam meter
-|   |   |   +-- call_report_screen.dart    # Post-call threat report
-|   |   |   +-- intelligence_screen.dart   # Scam intelligence + dynamic quiz
-|   |   |   +-- scam_vaccine_screen.dart   # Voice-based scam training
-|   |   |   +-- family_link_screen.dart    # Family protection network
-|   |   |   +-- alerts_screen.dart         # Scam alert notifications
-|   |   |   +-- settings_screen.dart       # App configuration
-|   |   +-- services/
-|   |   |   +-- api_service.dart           # Backend REST client
-|   |   |   +-- audio_service.dart         # Audio capture + TTS/STT
-|   |   |   +-- webrtc_service.dart        # WebRTC peer connection
-|   |   +-- main.dart                  # App entry + Firestore call listener
-|   +-- pubspec.yaml
-|
-+-- uncle-ah-hock---johor-kopi-chat/   # React/Vite Web App (Port 3000)
-|   +-- App.tsx                        # Main scammer panel UI
-|   +-- components/
-|   |   +-- AudioVisualizer.tsx        # Real-time audio waveform
-|   |   +-- VictimPhone.tsx            # Simulated victim phone display
-|   +-- services/
-|   |   +-- geminiService.ts           # Gemini API client
-|   |   +-- firebaseService.ts         # Firestore real-time sync
-|   |   +-- webrtcService.ts           # WebRTC audio streaming
-|   |   +-- scamAnalyzer.ts            # Client-side scam analysis
-|   |   +-- scamIntelligence.ts        # Intelligence feed client
-|   |   +-- botDetector.ts             # Bot behavior detection
-|   |   +-- contactVerifier.ts         # Organization verification
-|   |   +-- evidenceCollector.ts       # Evidence collection for reports
-|   |   +-- pdrmSubmit.ts              # PDRM police report generator
-|   |   +-- apiKeyManager.ts           # API key rotation
-|   +-- Dockerfile
-|   +-- nginx.conf
-|
-+-- docker-compose.yml                 # One-command Docker deployment
-+-- start.bat                          # Windows one-click startup
-+-- start.sh                           # Mac/Linux one-click startup
-+-- SETUP.md                           # Detailed setup & deployment guide
-```
+* Detect suspicious scam language and manipulation tactics
+* Analyze whether the caller’s voice may be synthetic or suspicious
+* Verify claimed organizations using external context
+* Alert family members when a high-risk call is detected
+* Train users through simulated scam scenarios
+* Demonstrate how an AI decoy could delay scammers during a suspicious interaction
 
 ---
 
 ## Key Features
 
-| Feature | Mobile | Web | Backend |
-|---------|--------|-----|---------|
-| Real-time call monitoring | Yes | Yes | Yes |
-| Live transcript display | Yes | Yes | -- |
-| Audio deepfake detection (WavLM) | -- | -- | Yes |
-| Audio deepfake detection (Gemini Native Audio) | -- | -- | Yes |
-| Scam content analysis (Gemini Pro) | -- | Yes | Yes |
-| Uncle Ah Hock AI decoy | -- | Yes | Yes |
-| Auto-hangup with threat report | Yes | Yes | Yes |
-| PDRM scam report generation | Yes | Yes | -- |
-| Family alert network (FCM) | Yes | -- | Yes |
-| Scam intelligence feed | Yes | -- | Yes |
-| Scam Vaccine voice training | Yes | -- | Yes |
-| Dynamic scam quiz | Yes | -- | Yes |
-| Organization verification (Grounding) | -- | Yes | Yes |
-| Audio relay (WebSocket) | -- | Yes | Yes |
+| Feature                             | Description                                                                                                      |
+| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Multi-layer threat scoring          | Combines audio, content, behavioural, and contextual signals into a single risk assessment                       |
+| Audio deepfake detection experiment | Uses WavLM and Gemini audio analysis to evaluate whether a voice may be synthetic                                |
+| Scam content analysis               | Uses Gemini-based reasoning to detect suspicious language, threats, urgency, impersonation, and payment pressure |
+| Caller claim verification           | Uses search-grounded checks to help verify claimed organizations or suspicious caller claims                     |
+| Live call dashboard                 | Web interface for visualising call state, transcript, audio activity, and threat signals                         |
+| Family alert network                | Sends push alerts to linked family members when a high-risk scam call is detected                                |
+| Scam Vaccine training               | Provides voice-based scam simulation and response training for users                                             |
+| Uncle Ah Hock AI decoy              | Demo AI persona designed to continue a suspicious conversation and waste scammer time                            |
+| PDRM-style report generation        | Generates structured report data with transcript, score, timestamps, and evidence summary                        |
+| Firebase real-time sync             | Keeps mobile, backend, and web demo state synchronized                                                           |
 
 ---
 
-## Challenges Faced and Solutions
+## Project Status
 
-| Challenge | Solution |
-|-----------|----------|
-| **Audio streaming from browser to mobile** | Built a WebSocket relay bridge (port 8765) in the backend that forwards WebRTC audio from the web panel to the mobile app in real time |
-| **Deepfake detection latency** | Dual-pipeline approach: WavLM runs locally for fast classification, Gemini Native Audio runs in parallel on cloud for second opinion. Results fused within 2 seconds |
-| **Human scammers undetected by voice AI** | Added Layer 2 (scam content analysis) using Gemini 2.5 Pro to analyze what callers SAY, not just how they sound. This catches 95% of human script-readers |
-| **Malaysia-specific scam context** | Gemini Grounding with Google Search retrieves real-time Malaysian scam patterns, LHDN/bank impersonation tactics, and verifies organization claims against live data |
-| **Real-time threat assessment** | Threat Engine v2 uses 3-signal weighted fusion (deepfake 42% + LLM 43% + retrieval 15%) with Firestore real-time sync achieving under 2-second end-to-end response |
-| **Protecting user voice from cloning** | Layer 5 injects adversarial noise patterns that are imperceptible to humans but corrupt voice cloning models attempting to capture the user's voice |
-| **Elderly users with low digital literacy** | Scam Vaccine provides guided voice-based training simulations, and Family Link allows tech-savvy family members to monitor and protect elderly relatives remotely |
+VeriCall is currently a prototype.
+
+### Implemented
+
+* Flutter mobile app screens for call monitoring, reports, alerts, settings, family linking, and scam training
+* Flask backend API for threat analysis, Firebase sync, audio-processing experiments, and report generation
+* React/Vite web dashboard for demo call simulation and live scam analysis
+* Firestore-based real-time call state synchronization
+* Firebase Cloud Messaging integration for family alerts
+* Gemini-powered scam content analysis and training scenario generation
+* WavLM-based audio deepfake detection experiment
+* WebSocket audio relay for demo audio streaming
+* Docker and local startup scripts
+
+### Experimental
+
+* Real-time audio risk scoring
+* Anti-voice-cloning audio perturbation
+* AI decoy conversation flow
+* Grounded caller verification
+* Auto-hangup decision rules
+* Scam pattern retrieval and scoring fusion
+
+### Future Work
+
+* Real telco or OS-level call interception
+* Production-grade privacy and security audit
+* Larger benchmark testing across Malaysian languages and dialects
+* Official police report submission integration
+* Voice biometric verification for trusted contacts
+* Community scam intelligence sharing
+* WhatsApp / Telegram voice call protection
 
 ---
 
-## Future Roadmap
+## System Architecture
 
-1. **Telco Integration** - Partner with Malaysian telcos (Maxis, Celcom, Digi) to intercept real incoming calls before they reach the user
-2. **Multi-Language Support** - Add Bahasa Melayu, Mandarin, and Tamil analysis for Malaysia's multilingual population
-3. **Community Scam Network** - Crowdsourced scam number reporting with verified community intelligence
-4. **PDRM Direct Submission** - API integration with Royal Malaysia Police for one-tap official scam report filing
-5. **Voice Biometric Verification** - Verify known callers (family, bank) using voiceprint matching
-6. **Federated Learning** - Privacy-preserving model updates across devices without sharing raw audio data
-7. **WhatsApp / Telegram Integration** - Extend protection to voice calls on messaging platforms
+```text
++--------------------------------------+
+| Mobile App                           |
+| Flutter                              |
+|                                      |
+| - Call monitoring UI                 |
+| - Live scam risk display             |
+| - Post-call threat report            |
+| - Scam Vaccine training              |
+| - Family alert management            |
++------------------+-------------------+
+                   |
+                   | REST API + Firestore sync
+                   |
++------------------v-------------------+
+| Backend API                          |
+| Python Flask                         |
+|                                      |
+| - Threat Engine                      |
+| - Audio deepfake detection           |
+| - Gemini scam analysis               |
+| - Firebase integration               |
+| - WebSocket audio relay              |
+| - Report generation                  |
++------------------+-------------------+
+                   |
+                   | HTTP + WebSocket + Firestore
+                   |
++------------------v-------------------+
+| Web Dashboard                        |
+| React + Vite + TypeScript            |
+|                                      |
+| - Demo call simulation               |
+| - Audio visualisation                |
+| - Live transcript display            |
+| - Threat analysis dashboard          |
+| - Uncle Ah Hock decoy panel          |
++------------------+-------------------+
+                   |
+                   | Cloud services
+                   |
++------------------v-------------------+
+| Firebase + Google AI                 |
+|                                      |
+| - Firestore real-time database       |
+| - Firebase Cloud Messaging           |
+| - Firebase Auth                      |
+| - Gemini API                         |
+| - Grounding with Google Search       |
++--------------------------------------+
+```
 
 ---
 
-## SDG 16: Peace, Justice and Strong Institutions
+## Detection Approach
 
-VeriCall directly addresses United Nations Sustainable Development Goal 16:
+VeriCall uses a multi-signal approach instead of relying on one model only.
 
-| SDG 16 Target | How VeriCall Contributes |
-|---------------|------------------------|
-| **16.1** Significantly reduce all forms of violence | Reduces financial violence from voice scams that cause RM2.72B annual losses and psychological harm to victims |
-| **16.3** Promote the rule of law | Generates PDRM-format police reports with evidence (transcripts, threat scores, timestamps) for law enforcement |
-| **16.5** Substantially reduce corruption and bribery | Detects impersonation of government agencies (LHDN, PDRM, Bank Negara) used in corruption-themed scams |
-| **16.a** Strengthen relevant national institutions | Provides AI-powered defense infrastructure that can scale nationally to protect all Malaysians |
+```text
+Signal 1: Audio Deepfake Analysis
+- WavLM-based audio representation
+- Gemini audio analysis
+- Synthetic voice risk signal
 
-**Impact Potential:**
-- RM2.72 billion in annual scam losses that could be prevented
-- 454+ deepfake fraud cases per year that could be detected
-- Elderly population protected through Family Link and Scam Vaccine training
-- Every minute Uncle Ah Hock engages a scammer = one minute NOT spent scamming a real victim
+Signal 2: Scam Content Analysis
+- Transcript and message analysis
+- Suspicious intent detection
+- Scam script and impersonation pattern recognition
+
+Signal 3: Behavioural Pattern Analysis
+- Urgency
+- Threats
+- Payment pressure
+- Request for OTP or banking details
+- Attempts to capture the user’s voice
+
+Signal 4: Caller Claim Verification
+- Organization claim checking
+- Search-grounded context
+- Malaysia-specific scam pattern lookup
+
+Signal 5: User Protection Flow
+- Risk report
+- Family alert
+- Training guidance
+- AI decoy demo flow
+```
+
+The backend combines these signals into a threat score and returns a structured analysis result to the mobile app and web dashboard.
+
+---
+
+## Tech Stack
+
+### Mobile App
+
+| Technology              | Purpose                                      |
+| ----------------------- | -------------------------------------------- |
+| Flutter                 | Cross-platform mobile app                    |
+| Dart                    | Mobile app programming language              |
+| Firebase SDK            | Auth, Firestore sync, and push notifications |
+| WebRTC / audio services | Demo audio capture and call simulation       |
+
+### Backend
+
+| Technology         | Purpose                                                 |
+| ------------------ | ------------------------------------------------------- |
+| Python             | Backend programming language                            |
+| Flask              | REST API server                                         |
+| WebSocket          | Real-time audio relay                                   |
+| WavLM              | Audio deepfake detection experiment                     |
+| Google Gemini API  | Scam reasoning, scenario generation, and audio analysis |
+| Firebase Admin SDK | Firestore and FCM server integration                    |
+
+### Web Dashboard
+
+| Technology       | Purpose                    |
+| ---------------- | -------------------------- |
+| React            | Web interface              |
+| Vite             | Frontend build tool        |
+| TypeScript       | Safer frontend development |
+| Firebase Web SDK | Real-time call state sync  |
+| WebRTC           | Demo audio streaming       |
+
+### Cloud / Services
+
+| Technology               | Purpose                                     |
+| ------------------------ | ------------------------------------------- |
+| Firebase Firestore       | Real-time call state database               |
+| Firebase Cloud Messaging | Family push alerts                          |
+| Firebase Auth            | Anonymous or lightweight user identity      |
+| Google AI / Gemini       | AI-powered scam analysis and training flows |
+
+---
+
+## Project Structure
+
+```text
+vericall-malaysia/
+|
++-- backend/                          # Python Flask backend API
+|   +-- app/
+|   |   +-- api/
+|   |   |   +-- routes.py             # API routes
+|   |   +-- services/
+|   |   |   +-- threat_orchestrator.py # Multi-signal threat scoring
+|   |   |   +-- hangup_policy.py       # Auto-hangup decision rules
+|   |   |   +-- deepfake_detector.py   # WavLM audio detection experiment
+|   |   |   +-- gemini_audio_detector.py
+|   |   |   +-- gemini_audio_analyzer.py
+|   |   |   +-- scam_analyzer.py
+|   |   |   +-- uncle_ah_hock.py
+|   |   |   +-- scam_vaccine.py
+|   |   |   +-- scam_intelligence.py
+|   |   |   +-- scam_grounding.py
+|   |   |   +-- firebase_service.py
+|   |   |   +-- call_audio_bridge.py
+|   |   |   +-- call_orchestrator.py
+|   |   |   +-- retrieval_engine.py
+|   |   |   +-- hybrid_detector.py
+|   |   |   +-- pattern_learner.py
+|   |   |   +-- redaction.py
+|   |   |   +-- gemini_adapter.py
+|   |   +-- config.py
+|   +-- demo.py
+|   +-- test_api.py
+|   +-- requirements.txt
+|   +-- Dockerfile
+|
++-- mobile/                            # Flutter mobile app
+|   +-- lib/
+|   |   +-- screens/
+|   |   |   +-- home_screen.dart
+|   |   |   +-- call_screen.dart
+|   |   |   +-- incoming_call_screen.dart
+|   |   |   +-- active_call_screen.dart
+|   |   |   +-- call_report_screen.dart
+|   |   |   +-- intelligence_screen.dart
+|   |   |   +-- scam_vaccine_screen.dart
+|   |   |   +-- family_link_screen.dart
+|   |   |   +-- alerts_screen.dart
+|   |   |   +-- settings_screen.dart
+|   |   +-- services/
+|   |   |   +-- api_service.dart
+|   |   |   +-- audio_service.dart
+|   |   |   +-- webrtc_service.dart
+|   |   +-- main.dart
+|   +-- pubspec.yaml
+|
++-- uncle-ah-hock---johor-kopi-chat/   # React/Vite web dashboard
+|   +-- App.tsx
+|   +-- components/
+|   |   +-- AudioVisualizer.tsx
+|   |   +-- VictimPhone.tsx
+|   +-- services/
+|   |   +-- geminiService.ts
+|   |   +-- firebaseService.ts
+|   |   +-- webrtcService.ts
+|   |   +-- scamAnalyzer.ts
+|   |   +-- scamIntelligence.ts
+|   |   +-- botDetector.ts
+|   |   +-- contactVerifier.ts
+|   |   +-- evidenceCollector.ts
+|   |   +-- pdrmSubmit.ts
+|   |   +-- apiKeyManager.ts
+|   +-- Dockerfile
+|   +-- nginx.conf
+|
++-- docker-compose.yml
++-- start.bat
++-- start.sh
++-- SETUP.md
+```
 
 ---
 
 ## Quick Start
 
-### One-Command Startup
+### Option 1: Docker
 
-**Windows:**
-```
-start.bat
-```
-
-**Mac/Linux:**
-```
-chmod +x start.sh && ./start.sh
-```
-
-This starts the backend (port 5000) and web app (port 3000) automatically.
-
-### Docker
 ```bash
 docker compose up --build
 ```
 
-### Manual Setup
+### Option 2: One-Command Startup
+
+Windows:
+
 ```bash
-# Backend
+start.bat
+```
+
+macOS / Linux:
+
+```bash
+chmod +x start.sh
+./start.sh
+```
+
+### Option 3: Manual Setup
+
+#### Backend
+
+```bash
 cd backend
+
 python -m venv venv
-venv\Scripts\activate          # Windows
-source venv/bin/activate       # Mac/Linux
+
+# Windows
+venv\Scripts\activate
+
+# macOS / Linux
+source venv/bin/activate
+
 pip install -r requirements.txt
 python -m app.main
+```
 
-# Web App
+The backend runs on:
+
+```text
+http://localhost:5000
+```
+
+#### Web Dashboard
+
+```bash
 cd uncle-ah-hock---johor-kopi-chat
 npm install
 npm run dev
+```
 
-# Mobile App
+The web dashboard runs on:
+
+```text
+http://localhost:3000
+```
+
+#### Mobile App
+
+```bash
 cd mobile
 flutter pub get
 flutter run
 ```
 
-See [SETUP.md](SETUP.md) for full deployment guide including Docker, cloud deployment (Railway, Render, Google Cloud Run), Firebase setup, and troubleshooting.
+For a physical device, pass the backend URL:
+
+```bash
+flutter run --dart-define=VERICALL_API_BASE_URL=http://YOUR_LOCAL_IP:5000/api
+```
 
 ---
-
 
 ## Environment Variables
 
-### Backend (`backend/.env`)
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `GEMINI_API_KEY` | Yes | Google Gemini API key |
-| `GEMINI_API_KEYS` | No | Comma-separated keys for auto-rotation on quota limits |
-| `FIREBASE_PROJECT_ID` | Yes | Firebase project ID |
-| `FIREBASE_CREDENTIALS_PATH` | Yes | Path to service account JSON |
-| `PORT` | No | HTTP port (default: 5000) |
-| `CALL_AUDIO_WS_PORT` | No | WebSocket audio relay port (default: 8765) |
-| `AUTO_HANGUP_ENABLED` | No | Auto-hangup on scam detection (default: true) |
+### Backend `.env`
 
-### Web App (`uncle-ah-hock---johor-kopi-chat/.env.local`)
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `VITE_API_KEY` | Yes | Gemini API key for client-side |
-| `VITE_BACKEND_URL` | No | Backend URL (default: http://localhost:5000/api) |
-| `VITE_FIREBASE_API_KEY` | Yes | Firebase web API key |
-| `VITE_FIREBASE_PROJECT_ID` | Yes | Firebase project ID |
+Create:
+
+```text
+backend/.env
+```
+
+Example:
+
+```env
+GEMINI_API_KEY=your_gemini_api_key
+GEMINI_API_KEYS=optional_key_1,optional_key_2
+
+FIREBASE_PROJECT_ID=your_firebase_project_id
+FIREBASE_CREDENTIALS_PATH=path/to/firebase-service-account.json
+
+PORT=5000
+CALL_AUDIO_WS_PORT=8765
+
+AUTO_HANGUP_ENABLED=true
+```
+
+### Web Dashboard `.env.local`
+
+Create:
+
+```text
+uncle-ah-hock---johor-kopi-chat/.env.local
+```
+
+Example:
+
+```env
+VITE_API_KEY=your_gemini_api_key
+VITE_BACKEND_URL=http://localhost:5000/api
+
+VITE_FIREBASE_API_KEY=your_firebase_web_api_key
+VITE_FIREBASE_PROJECT_ID=your_firebase_project_id
+```
 
 ### Mobile App
-Pass via `flutter run --dart-define=VERICALL_API_BASE_URL=http://YOUR_IP:5000/api` for physical devices.
 
----
+Pass the backend URL using Dart define:
 
-*Built for KitaHack 2026 -- Protecting Malaysians from voice scams with Google AI*
+```bash
+flutter run --dart-define=VERICALL_API_BASE_URL=http://YOUR_LOCAL_IP:5000/api
+```
